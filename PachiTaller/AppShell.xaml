@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="PachiTaller.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:PachiTaller"
+    Title="Pachi Garage"
+    BackgroundColor="#512BD4"
+    ForegroundColor="White"
+    TitleColor="White">
+
+    <!-- esto saca la navegacion de pestañas -->
+    <TabBar Shell.TabBarIsVisible="False">
+
+        <!-- inicio , donde el shell muestra la carpeta local que va abrir, asi sucede con las demas carpetas -->
+        <Tab Title="Inicio" Route="Inicio">
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
+        </Tab>
+
+       
+        <Tab Title="Turnos" Route="Turnos">
+            <ShellContent ContentTemplate="{DataTemplate local:Turnos}" />
+        </Tab>
+
+        
+        <Tab Title="Historial" Route="Historial">
+            <ShellContent ContentTemplate="{DataTemplate local:Historial}" />
+        </Tab>
+
+        
+        <Tab Title="Repuestos" Route="Repuestos">
+            <ShellContent ContentTemplate="{DataTemplate local:Repuestos}" />
+        </Tab>
+
+    </TabBar>
+</Shell>
+
+
+
+

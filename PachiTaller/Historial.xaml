@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PachiTaller.Historial"
+             Title="Historial - Pachi Garage"
+             BackgroundColor="#F4F6F9">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+             <!--aca esta el boton que va a estar arriba que seria para volver al inicio-->
+            <Button Text="← Volver al Inicio"
+                    Clicked="OnVolverInicioClicked"
+                    BackgroundColor="Transparent"
+                    TextColor="#512BD4"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start"
+                    Margin="0,0,0,5" />
+
+            <!-- titulo con label -->
+            <Label Text="Historial de Vehículos en Taller"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="#512BD4" />
+
+            <!-- la caja del buscador -->
+            <Border Stroke="#512BD4" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="50">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8" />
+                </Border.StrokeShape>
+                <Entry Placeholder="Buscar por patente o dueño..." PlaceholderColor="Gray" TextColor="Black" VerticalOptions="Center" />
+            </Border>
+
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

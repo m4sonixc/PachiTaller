@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PachiTaller.MainPage"
+             Title="Pachi Garage"
+             BackgroundColor="#F4F6F9">
+
+    <!-- esto sirve para que la app pueda adaptarse a distintos tamaños de pantallas -->
+    <ScrollView>
+        <!-- principal centrado con margen -->
+        <VerticalStackLayout Padding="20" Spacing="20" HorizontalOptions="Fill">
+
+            <!-- este es el titulo grande en la parte superior -->
+            <Label Text="Pachi Garage"
+                   FontSize="30"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#1B2A4A" />
+
+            <!-- Subtítulo del Taller Mecánico -->
+            <Label Text="Taller Mecánico &amp; Repuestos"
+                   FontSize="16"
+                   HorizontalOptions="Center"
+                   TextColor="#512BD4"
+                   Margin="0,-15,0,0" />
+
+            <!-- aca va el logo que va a en el centro de la pantalla principal -->
+            <Border Stroke="#512BD4" 
+                    StrokeThickness="2" 
+                    HeightRequest="190" 
+                    WidthRequest="320" 
+                    HorizontalOptions="Center" 
+                    BackgroundColor="#1B2A4A">
+                <Border.StrokeShape>
+                    <!-- se pide que la imagen este adaptada-->
+                    <RoundRectangle CornerRadius="16" />
+                </Border.StrokeShape>
+                <Image Source="logopachi.png"
+                       Aspect="AspectFill"
+                       HeightRequest="190"
+                       WidthRequest="320" />
+            </Border>
+            <BoxView HeightRequest="1" Color="#D1D5DB" Margin="0,10" />
+
+            <!-- pide que selecciones una opcion -->
+            <Label Text="Seleccione una opción:"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="#1B2A4A" />
+            
+            <!-- muestra la primera seccion  -->
+            <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="#1B2A4A" Padding="15">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTurnosClicked" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="3">
+                    <Label Text="Turnos" FontSize="20" FontAttributes="Bold" TextColor="White" />
+                    <Label Text="Agendar nuevos turnos de ingreso al taller" FontSize="13" TextColor="#D1D5DB" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- muestra la segunda seccion que va a ser historial -->
+            <Border Stroke="#512BD4" StrokeThickness="1" BackgroundColor="#512BD4" Padding="15">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnHistorialClicked" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="3">
+                    <Label Text="Historial de Vehículos" FontSize="20" FontAttributes="Bold" TextColor="White" />
+                    <Label Text="Consultar registros y estados de vehículos" FontSize="13" TextColor="#D1D5DB" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- esta seria una implementacion de repuestos pero no nos queda claro como hacerla o si agregar otra seccion -->
+            
+            <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="#1B2A4A" Padding="15">
+                 <Border.StrokeShape>
+                 <RoundRectangle CornerRadius="12" />
+                   </Border.StrokeShape>
+                   <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnRepuestosClicked" />
+                     </Border.GestureRecognizers>
+             <VerticalStackLayout Spacing="3">
+                 <Label Text="Repuestos" FontSize="20" FontAttributes="Bold" TextColor="White" />
+                <Label Text="Catálogo de repuestos e insumos disponibles" FontSize="13" TextColor="#D1D5DB" />
+                 </VerticalStackLayout>
+            </Border>
+            
+
+        </VerticalStackLayout>
+    </ScrollView>
+   
+
+
+</ContentPage>
