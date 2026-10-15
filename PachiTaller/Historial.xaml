@@ -2,35 +2,135 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PachiTaller.Historial"
-             Title="Historial - Pachi Garage"
+             Title="Historial de Vehículos"
              BackgroundColor="#F4F6F9">
+
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
-             <!--aca esta el boton que va a estar arriba que seria para volver al inicio-->
+
+            <!-- Botón Volver al Inicio -->
             <Button Text="← Volver al Inicio"
                     Clicked="OnVolverInicioClicked"
                     BackgroundColor="Transparent"
                     TextColor="#512BD4"
-                    FontSize="16"
+                    FontSize="14"
                     FontAttributes="Bold"
-                    HorizontalOptions="Start"
-                    Margin="0,0,0,5" />
+                    HorizontalOptions="Start" />
 
-            <!-- titulo con label -->
-            <Label Text="Historial de Vehículos en Taller"
-                   FontSize="22"
-                   FontAttributes="Bold"
-                   TextColor="#512BD4" />
+            <Label Text="Historial de Trabajos" FontSize="24" FontAttributes="Bold" TextColor="#1B2A4A" />
+            <Label Text="Registro de vehículos con servicios finalizados o cancelados:" FontSize="13" TextColor="Gray" />
 
-            <!-- la caja del buscador -->
-            <Border Stroke="#512BD4" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="50">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="8" />
-                </Border.StrokeShape>
-                <Entry Placeholder="Buscar por patente o dueño..." PlaceholderColor="Gray" TextColor="Black" VerticalOptions="Center" />
-            </Border>
+            <!-- Lista de Historial -->
+            <CollectionView x:Name="ListaHistorialView" SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="0,40,0,0" Spacing="10">
+                        <Label Text="No hay turnos finalizados o cancelados en el historial." 
+                               HorizontalOptions="Center" 
+                               TextColor="Gray" 
+                               FontSize="14" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
 
-            
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <!-- Tarjeta individual del historial -->
+                        <Border Stroke="#1B2A4A" 
+                                StrokeThickness="1" 
+                                BackgroundColor="White" 
+                                Padding="15" 
+                                Margin="0,0,0,15">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <VerticalStackLayout Spacing="8">
+
+                                <!-- Encabezado de la tarjeta -->
+                                <HorizontalStackLayout Spacing="5">
+                                    <Label Text="Vehículo:" FontAttributes="Bold" TextColor="#1B2A4A" FontSize="16" />
+                                    <Label Text="{Binding Vehiculo}" TextColor="#512BD4" FontAttributes="Bold" FontSize="16" />
+                                </HorizontalStackLayout>
+
+                                <BoxView HeightRequest="1" Color="#E5E7EB" Margin="0,2" />
+
+                                <HorizontalStackLayout Spacing="5">
+                                    <Label Text="Cliente:" FontAttributes="Bold" TextColor="#1B2A4A" />
+                                    <Label Text="{Binding NombreCliente}" TextColor="Black" />
+                                </HorizontalStackLayout>
+
+                                <HorizontalStackLayout Spacing="5">
+                                    <Label Text="Teléfono:" FontAttributes="Bold" TextColor="#1B2A4A" />
+                                    <Label Text="{Binding Telefono}" TextColor="Black" />
+                                </HorizontalStackLayout>
+
+                                <HorizontalStackLayout Spacing="5">
+                                    <Label Text="Fecha Solic.:" FontAttributes="Bold" TextColor="#1B2A4A" />
+                                    <Label Text="{Binding FechaTurno}" TextColor="Black" />
+                                </HorizontalStackLayout>
+
+                                <HorizontalStackLayout Spacing="5">
+                                    <Label Text="Motivo de Ingreso:" FontAttributes="Bold" TextColor="#1B2A4A" />
+                                    <Label Text="{Binding Motivo}" TextColor="#374151" />
+                                </HorizontalStackLayout>
+
+                                <!-- Diagnóstico técnico realizado -->
+                                <VerticalStackLayout Spacing="3" Margin="0,3,0,0">
+                                    <Label Text="Diagnóstico Realizado:" FontAttributes="Bold" TextColor="#1B2A4A" />
+                                    <Border BackgroundColor="#F3F4F6" Padding="10" StrokeThickness="0">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="6" />
+                                        </Border.StrokeShape>
+                                        <Label Text="{Binding Diagnostico}" TextColor="#1F2937" FontAttributes="Italic" />
+                                    </Border>
+                                </VerticalStackLayout>
+
+                                <!-- Estado Final -->
+                                <HorizontalStackLayout Spacing="8" Margin="0,5,0,0" VerticalOptions="Center">
+                                    <Label Text="Estado Final:" FontAttributes="Bold" TextColor="#1B2A4A" VerticalOptions="Center" />
+                                    <Border BackgroundColor="#E0E7FF" Padding="10,5" VerticalOptions="Center">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="6" />
+                                        </Border.StrokeShape>
+                                        <Label Text="{Binding Estado}" 
+                                               TextColor="#512BD4" 
+                                               FontAttributes="Bold" 
+                                               FontSize="13" />
+                                    </Border>
+                                </HorizontalStackLayout>
+
+                                <!-- Total abonado / cobrado -->
+                                <Border BackgroundColor="#ECFDF5" 
+                                        Stroke="#22C55E" 
+                                        StrokeThickness="1" 
+                                        Padding="12" 
+                                        Margin="0,8,0,0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="8" />
+                                    </Border.StrokeShape>
+
+                                    <Grid ColumnDefinitions="*, Auto">
+                                        <Label Grid.Column="0" 
+                                               Text="Monto Total Cobrado:" 
+                                               FontAttributes="Bold" 
+                                               TextColor="#065F46" 
+                                               FontSize="14" 
+                                               VerticalOptions="Center" />
+
+                                        <Label Grid.Column="1" 
+                                               Text="{Binding CostoTotal, StringFormat='${0:N0}'}" 
+                                               TextColor="#047857" 
+                                               FontAttributes="Bold" 
+                                               FontSize="16" 
+                                               VerticalOptions="Center" />
+                                    </Grid>
+                                </Border>
+
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

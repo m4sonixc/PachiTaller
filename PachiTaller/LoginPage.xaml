@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PachiTaller.LoginPage"
+             Title="Pachi Garage"
+             BackgroundColor="#F4F6F9">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+             <Border Stroke="#1B2A4A" 
+                 StrokeThickness="2" 
+                  BackgroundColor="White" 
+                HeightRequest="200" 
+                 WidthRequest="280" 
+                 HorizontalOptions="Center" 
+                 Padding="0" 
+                 Margin="0,0,0,15">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="24" />
+                </Border.StrokeShape>
+                <Grid IsClippedToBounds="True">
+                <Image Source="logopachi.png" 
+                    Aspect="AspectFill" 
+                     HorizontalOptions="Fill" 
+                     VerticalOptions="Fill" />
+                </Grid>
+            </Border>
+            <!-- Logo / Título del Taller -->
+            <Label Text="Pachi Garage"
+                   FontSize="32"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#1B2A4A" />
+
+            <Label Text="Gestión Mecánica &amp; Servicios"
+                   FontSize="16"
+                   HorizontalOptions="Center"
+                   TextColor="#512BD4"
+                   Margin="0,-15,0,10" />
+
+            <!-- Campo Usuario -->
+            <Label Text="Usuario o Correo" FontAttributes="Bold" TextColor="#1B2A4A" />
+            <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="50">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8" />
+                </Border.StrokeShape>
+                <Entry x:Name="TxtUsuario" Placeholder="Ingrese su usuario..." PlaceholderColor="Gray" TextColor="Black" VerticalOptions="Center" />
+            </Border>
+
+            <!-- Campo Contraseña -->
+            <Label Text="Contraseña" FontAttributes="Bold" TextColor="#1B2A4A" />
+            <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="50">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8" />
+                </Border.StrokeShape>
+                <Entry x:Name="TxtPassword" Placeholder="Ingrese su contraseña..." IsPassword="True" PlaceholderColor="Gray" TextColor="Black" VerticalOptions="Center" />
+            </Border>
+
+            <!-- Botón Iniciar Sesión -->
+            <Button Text="Iniciar Sesión"
+                    Clicked="OnIngresarClicked"
+                    BackgroundColor="#512BD4"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    Margin="0,10,0,0" />
+
+            <!-- Enlace / Botón de Registro para Clientes -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Margin="0,15,0,0">
+                <Label Text="¿No tienes una cuenta?" TextColor="Black" VerticalOptions="Center" />
+                <Button Text="Registrarse aquí"
+                        Clicked="OnRegistrarseClicked"
+                        BackgroundColor="Transparent"
+                        TextColor="#512BD4"
+                        FontAttributes="Bold"
+                        Padding="0" />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

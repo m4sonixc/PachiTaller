@@ -15,9 +15,12 @@ namespace PachiTaller
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-#if DEBUG
-    		builder.Logging.AddDebug();
-#endif
+            // Registrar el servicio Singleton de la Base de Datos SQLite
+            builder.Services.AddSingleton<DatabaseService>();
+
+            // Registrar las páginas
+            builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<RegistroPage>();
 
             return builder.Build();
         }

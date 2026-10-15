@@ -9,32 +9,49 @@
     ForegroundColor="White"
     TitleColor="White">
 
-    <!-- esto saca la navegacion de pestañas -->
     <TabBar Shell.TabBarIsVisible="False">
 
-        <!-- inicio , donde el shell muestra la carpeta local que va abrir, asi sucede con las demas carpetas -->
-        <Tab Title="Inicio" Route="Inicio">
-            <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
+        <!-- Ruta 1: Login (Pantalla Inicial) -->
+        <Tab Title="Login" Route="Login">
+            <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" />
         </Tab>
 
-       
+        <!-- Ruta 2: Registro de Cliente -->
+        <Tab Title="Registro" Route="Registro">
+            <ShellContent ContentTemplate="{DataTemplate local:RegistroPage}" />
+        </Tab>
+
+        <!-- Ruta 3: Menú Administrador (Mecánico/Taller) -->
+        <Tab Title="Inicio Admin" Route="InicioAdmin">
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
+        </Tab>
+        
+        <Tab Title="Editar Turno" Route="EditarTurno">
+            <ShellContent ContentTemplate="{DataTemplate local:EditarTurnoPage}" />
+        </Tab>
+        
+        <!-- Ruta 4: Menú Usuario (Cliente) -->
+        <Tab Title="Inicio Usuario" Route="InicioUsuario">
+            <ShellContent ContentTemplate="{DataTemplate local:UsuarioMainPage}" />
+        </Tab>
+
+        <!-- Módulos Secundarios -->
         <Tab Title="Turnos" Route="Turnos">
             <ShellContent ContentTemplate="{DataTemplate local:Turnos}" />
         </Tab>
-
         
+        <Tab Title="Estado Turno" Route="EstadoTurno">
+            <ShellContent ContentTemplate="{DataTemplate local:EstadoTurnoPage}" />
+        </Tab>
+
         <Tab Title="Historial" Route="Historial">
             <ShellContent ContentTemplate="{DataTemplate local:Historial}" />
         </Tab>
 
-        
         <Tab Title="Repuestos" Route="Repuestos">
             <ShellContent ContentTemplate="{DataTemplate local:Repuestos}" />
         </Tab>
 
     </TabBar>
+
 </Shell>
-
-
-
-

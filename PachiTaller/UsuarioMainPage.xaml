@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PachiTaller.UsuarioMainPage"
+             Title="Panel Cliente"
+             BackgroundColor="#F4F6F9">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- Botón Cerrar Sesión -->
+            <Button Text="← Cerrar Sesión"
+                    Clicked="OnCerrarSesionClicked"
+                    BackgroundColor="Transparent"
+                    TextColor="#512BD4"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start" />
+
+            <Label Text="Bienvenido, Cliente" FontSize="24" FontAttributes="Bold" TextColor="#1B2A4A" />
+            <Label Text="Seleccione una opción para su vehículo:" FontSize="14" TextColor="Gray" />
+
+            <!-- Opción 1: Registrar Turno -->
+            <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="#1B2A4A" Padding="15">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnRegistrarTurnoClicked" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="3">
+                    <Label Text="Registrar Turno" FontSize="18" FontAttributes="Bold" TextColor="White" />
+                    <Label Text="Solicitar una nueva cita de revisión o servicio" FontSize="12" TextColor="#D1D5DB" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Opción 2: Estado de Turno -->
+            <Border Stroke="#512BD4" StrokeThickness="1" BackgroundColor="#512BD4" Padding="15">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnEstadoTurnoClicked" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="3">
+                    <Label Text="Estado de Turno" FontSize="18" FontAttributes="Bold" TextColor="White" />
+                    <Label Text="Ver el progreso actual de reparación de su vehículo" FontSize="12" TextColor="#D1D5DB" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Opción 3: Historial de Turno -->
+            <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="#1B2A4A" Padding="15">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnHistorialTurnosClicked" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="3">
+                    <Label Text="Historial de Turnos" FontSize="18" FontAttributes="Bold" TextColor="White" />
+                    <Label Text="Consulte los servicios realizados anteriormente" FontSize="12" TextColor="#D1D5DB" />
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

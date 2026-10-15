@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PachiTaller.RegistroPage"
+             Title="Crear Cuenta"
+             BackgroundColor="#F4F6F9">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="25" Spacing="12">
+
+            <Button Text="← Volver al Login"
+                    Clicked="OnVolverLoginClicked"
+                    BackgroundColor="Transparent"
+                    TextColor="#512BD4"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start" />
+
+            <Label Text="Registro de Cliente" FontSize="24" FontAttributes="Bold" TextColor="#1B2A4A" />
+            <Label Text="Crea tu cuenta para agendar y consultar tus turnos" FontSize="13" TextColor="Gray" />
+
+            <!-- Nombre Completo -->
+            <Label Text="Nombre y Apellido" FontAttributes="Bold" TextColor="#1B2A4A" />
+            <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="45">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8" />
+                </Border.StrokeShape>
+                <Entry x:Name="TxtNombre" Placeholder="Ej. Juan Pérez" PlaceholderColor="Gray" TextColor="Black" VerticalOptions="Center" />
+            </Border>
+
+            <!-- Teléfono -->
+            <Label Text="Teléfono" FontAttributes="Bold" TextColor="#1B2A4A" />
+            <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="45">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8" />
+                </Border.StrokeShape>
+                <Entry x:Name="TxtTelefono" Placeholder="Ej. 3704123456" Keyboard="Telephone" PlaceholderColor="Gray" TextColor="Black" VerticalOptions="Center" />
+            </Border>
+
+            <!-- Nombre de Usuario -->
+            <Label Text="Usuario" FontAttributes="Bold" TextColor="#1B2A4A" />
+            <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="45">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8" />
+                </Border.StrokeShape>
+                <Entry x:Name="TxtRegUsuario" Placeholder="Crea un nombre de usuario" PlaceholderColor="Gray" TextColor="Black" VerticalOptions="Center" />
+            </Border>
+
+            <!-- Contraseña -->
+            <Label Text="Contraseña" FontAttributes="Bold" TextColor="#1B2A4A" />
+            <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="45">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8" />
+                </Border.StrokeShape>
+                <Entry x:Name="TxtRegPassword" Placeholder="Crea tu contraseña" IsPassword="True" PlaceholderColor="Gray" TextColor="Black" VerticalOptions="Center" />
+            </Border>
+
+            <Button Text="Registrarme"
+                    Clicked="OnConfirmarRegistroClicked"
+                    BackgroundColor="#1B2A4A"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    Margin="0,15,0,0" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

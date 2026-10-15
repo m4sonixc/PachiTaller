@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PachiTaller.EstadoTurnoPage"
+             Title="Mis Turnos y Estado"
+             BackgroundColor="#F4F6F9">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- Botón Volver al Inicio -->
+            <Button Text="← Volver al Inicio"
+                    Clicked="OnVolverInicioClicked"
+                    BackgroundColor="Transparent"
+                    TextColor="#512BD4"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start" />
+
+            <Label Text="Estado de Mis Turnos" FontSize="24" FontAttributes="Bold" TextColor="#1B2A4A" />
+            <Label Text="Consulte el progreso y presupuesto de sus vehículos solicitados:" FontSize="13" TextColor="Gray" />
+
+            <!-- Lista de Turnos en Tarjetas -->
+            <CollectionView x:Name="ListaTurnosUsuarioView" SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="0,40,0,0" Spacing="10">
+                        <Label Text="No tiene turnos ni solicitudes registradas actualmente." 
+                               HorizontalOptions="Center" 
+                               TextColor="Gray" 
+                               FontSize="14" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <!-- Tarjeta individual del turno -->
+                        <Border Stroke="#1B2A4A" 
+                                StrokeThickness="1" 
+                                BackgroundColor="White" 
+                                Padding="15" 
+                                Margin="0,0,0,15">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <VerticalStackLayout Spacing="8">
+
+                                <!-- Vehículo -->
+                                <HorizontalStackLayout Spacing="5">
+                                    <Label Text="🚗 Vehículo:" FontAttributes="Bold" TextColor="#1B2A4A" FontSize="16" />
+                                    <Label Text="{Binding Vehiculo}" TextColor="#512BD4" FontAttributes="Bold" FontSize="16" />
+                                </HorizontalStackLayout>
+
+                                <BoxView HeightRequest="1" Color="#E5E7EB" Margin="0,2" />
+
+                                <!-- Motivo inicial -->
+                                <HorizontalStackLayout Spacing="5">
+                                    <Label Text="Motivo de Ingreso:" FontAttributes="Bold" TextColor="#1B2A4A" />
+                                    <Label Text="{Binding Motivo}" TextColor="#374151" />
+                                </HorizontalStackLayout>
+
+                                <!-- Diagnóstico técnico del taller -->
+                                <VerticalStackLayout Spacing="3" Margin="0,3,0,0">
+                                    <Label Text="📋 Diagnóstico del Taller:" FontAttributes="Bold" TextColor="#1B2A4A" />
+                                    <Border BackgroundColor="#F3F4F6" Padding="10" StrokeThickness="0">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="6" />
+                                        </Border.StrokeShape>
+                                        <Label Text="{Binding Diagnostico}" TextColor="#1F2937" FontAttributes="Italic" />
+                                    </Border>
+                                </VerticalStackLayout>
+
+                                <!-- Estimación de entrega -->
+                                <HorizontalStackLayout Spacing="5" Margin="0,3,0,0">
+                                    <Label Text="⏱️ Estimación de Entrega:" FontAttributes="Bold" TextColor="#1B2A4A" />
+                                    <Label Text="{Binding FechaEstimadaTermino}" TextColor="#512BD4" FontAttributes="Bold" />
+                                </HorizontalStackLayout>
+
+                                <!-- Estado actual del vehículo -->
+                                <HorizontalStackLayout Spacing="8" Margin="0,5,0,0" VerticalOptions="Center">
+                                    <Label Text="Estado del Vehículo:" FontAttributes="Bold" TextColor="#1B2A4A" VerticalOptions="Center" />
+                                    <Border BackgroundColor="#E0E7FF" Padding="10,5" VerticalOptions="Center">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="6" />
+                                        </Border.StrokeShape>
+                                        <Label Text="{Binding Estado}" 
+                                               TextColor="#512BD4" 
+                                               FontAttributes="Bold" 
+                                               FontSize="13" />
+                                    </Border>
+                                </HorizontalStackLayout>
+
+                                <!-- Presupuesto Total (Ocupa todo el ancho sin recortarse) -->
+                                <Border BackgroundColor="#ECFDF5" 
+                                        Stroke="#22C55E" 
+                                        StrokeThickness="1" 
+                                        Padding="12" 
+                                        Margin="0,8,0,0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="8" />
+                                    </Border.StrokeShape>
+
+                                    <Grid ColumnDefinitions="*, Auto">
+                                        <Label Grid.Column="0" 
+                                               Text="Presupuesto Total:" 
+                                               FontAttributes="Bold" 
+                                               TextColor="#065F46" 
+                                               FontSize="14" 
+                                               VerticalOptions="Center" />
+
+                                        <Label Grid.Column="1" 
+                                               Text="{Binding CostoTotal, StringFormat='${0:N0}'}" 
+                                               TextColor="#047857" 
+                                               FontAttributes="Bold" 
+                                               FontSize="16" 
+                                               VerticalOptions="Center" />
+                                    </Grid>
+                                </Border>
+
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

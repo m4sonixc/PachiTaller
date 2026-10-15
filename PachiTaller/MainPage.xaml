@@ -9,7 +9,15 @@
     <ScrollView>
         <!-- principal centrado con margen -->
         <VerticalStackLayout Padding="20" Spacing="20" HorizontalOptions="Fill">
-
+            <!-- Botón Cerrar Sesión en la parte superior -->
+            <Button Text="← Cerrar Sesión"
+                   Clicked="OnCerrarSesionClicked"
+                   BackgroundColor="Transparent"
+                   TextColor="#512BD4"
+                   FontSize="14"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Start"
+                   Margin="0,0,0,10" />
             <!-- este es el titulo grande en la parte superior -->
             <Label Text="Pachi Garage"
                    FontSize="30"
@@ -17,29 +25,12 @@
                    HorizontalOptions="Center"
                    TextColor="#1B2A4A" />
 
-            <!-- Subtítulo del Taller Mecánico -->
             <Label Text="Taller Mecánico &amp; Repuestos"
                    FontSize="16"
                    HorizontalOptions="Center"
                    TextColor="#512BD4"
                    Margin="0,-15,0,0" />
 
-            <!-- aca va el logo que va a en el centro de la pantalla principal -->
-            <Border Stroke="#512BD4" 
-                    StrokeThickness="2" 
-                    HeightRequest="190" 
-                    WidthRequest="320" 
-                    HorizontalOptions="Center" 
-                    BackgroundColor="#1B2A4A">
-                <Border.StrokeShape>
-                    <!-- se pide que la imagen este adaptada-->
-                    <RoundRectangle CornerRadius="16" />
-                </Border.StrokeShape>
-                <Image Source="logopachi.png"
-                       Aspect="AspectFill"
-                       HeightRequest="190"
-                       WidthRequest="320" />
-            </Border>
             <BoxView HeightRequest="1" Color="#D1D5DB" Margin="0,10" />
 
             <!-- pide que selecciones una opcion -->
@@ -58,7 +49,7 @@
                 </Border.GestureRecognizers>
                 <VerticalStackLayout Spacing="3">
                     <Label Text="Turnos" FontSize="20" FontAttributes="Bold" TextColor="White" />
-                    <Label Text="Agendar nuevos turnos de ingreso al taller" FontSize="13" TextColor="#D1D5DB" />
+                    <Label Text="Verifica los turnos " FontSize="13" TextColor="#D1D5DB" />
                 </VerticalStackLayout>
             </Border>
 

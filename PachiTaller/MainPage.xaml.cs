@@ -25,5 +25,10 @@
             // Navega de forma segura utilizando la ruta registrada en AppShell
             await Shell.Current.GoToAsync("//Repuestos");
         }
+        private async void OnCerrarSesionClicked(object sender, EventArgs e)
+        {
+            // Redirige a la pantalla de inicio de sesión
+            await Shell.Current.GoToAsync("//Login");
+        }
     }
 }

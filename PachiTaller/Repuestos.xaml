@@ -2,35 +2,83 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PachiTaller.Repuestos"
-             Title="Repuestos"
-             BackgroundColor="White">
+             Title="Inventario de Repuestos"
+             BackgroundColor="#F4F6F9">
+
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
-            <!--mismo boton que la pestana de turnos-->
+
             <Button Text="← Volver al Inicio"
                     Clicked="OnVolverInicioClicked"
                     BackgroundColor="Transparent"
                     TextColor="#512BD4"
-                    FontSize="16"
+                    FontSize="14"
                     FontAttributes="Bold"
-                    HorizontalOptions="Start"
-                    Margin="0,0,0,5" />
+                    HorizontalOptions="Start" />
 
-      
-            <Label Text="Catálogo de Repuestos e Insumos (PROXIMAMENTE)...."
-                   FontSize="22"
-                   FontAttributes="Bold"
-                   TextColor="#1B2A4A" />
+            <Label Text="Inventario de Repuestos" FontSize="24" FontAttributes="Bold" TextColor="#1B2A4A" />
 
-       
+            <!-- FORMULARIO PARA REGISTRAR NUEVO STOCK -->
+            <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="15">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
 
-            <!-- aca iria para los disponibles -->
-            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*" ColumnSpacing="10" RowSpacing="10">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="➕ Cargar Nuevo Repuesto" FontAttributes="Bold" TextColor="#1B2A4A" FontSize="16" />
 
-               
+                    <Entry x:Name="TxtNombreRepuesto" Placeholder="Nombre (ej. Filtro de Aire)" TextColor="Black" HeightRequest="40" />
+                    <Entry x:Name="TxtCategoria" Placeholder="Categoría (ej. Filtros)" TextColor="Black" HeightRequest="40" />
 
-             
-            </Grid>
+                    <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
+                        <Entry Grid.Column="0" x:Name="TxtStock" Placeholder="Stock (cant.)" Keyboard="Numeric" TextColor="Black" HeightRequest="40" />
+                        <Entry Grid.Column="1" x:Name="TxtPrecio" Placeholder="Precio ($)" Keyboard="Numeric" TextColor="Black" HeightRequest="40" />
+                    </Grid>
+
+                    <Button Text="Guardar en Inventario" 
+                            Clicked="OnGuardarRepuestoClicked" 
+                            BackgroundColor="#1B2A4A" 
+                            TextColor="White" 
+                            FontAttributes="Bold" 
+                            CornerRadius="8" 
+                            HeightRequest="42" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- LISTADO DE REPUESTOS Y STOCK ACTUAL -->
+            <Label Text="Stock Disponible:" FontAttributes="Bold" TextColor="#1B2A4A" FontSize="18" Margin="0,10,0,0" />
+
+            <CollectionView x:Name="ListaRepuestosView" SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <Label Text="No hay repuestos cargados." HorizontalOptions="Center" TextColor="Gray" Margin="0,20,0,0" />
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="12" Margin="0,0,0,10">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8" />
+                            </Border.StrokeShape>
+
+                            <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto">
+                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding Nombre}" FontAttributes="Bold" TextColor="#1B2A4A" FontSize="15" />
+                                <Label Grid.Row="1" Grid.Column="0" Text="{Binding Categoria}" TextColor="Gray" FontSize="12" />
+
+                                <VerticalStackLayout Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center">
+                                    <HorizontalStackLayout Spacing="3" HorizontalOptions="End">
+                                        <Label Text="Stock: " FontAttributes="Bold" TextColor="#512BD4" />
+                                        <Label Text="{Binding Stock}" FontAttributes="Bold" TextColor="#512BD4" />
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout Spacing="2" HorizontalOptions="End">
+                                        <Label Text="$" FontAttributes="Bold" TextColor="#22C55E" />
+                                        <Label Text="{Binding Precio}" FontAttributes="Bold" TextColor="#22C55E" />
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
         </VerticalStackLayout>
     </ScrollView>

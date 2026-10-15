@@ -1,113 +1,163 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="PachiTaller.Turnos"
-             Title="Turnos - Pachi Garage"
-             BackgroundColor="White">
+             Title="Gestión de Turnos"
+             BackgroundColor="#F4F6F9">
+
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
-            
+            <!-- Botón de retorno seguro -->
             <Button Text="← Volver al Inicio"
                     Clicked="OnVolverInicioClicked"
                     BackgroundColor="Transparent"
                     TextColor="#512BD4"
-                    FontSize="16"
+                    FontSize="14"
                     FontAttributes="Bold"
-                    HorizontalOptions="Start"
-                    Margin="0,0,0,5" />
+                    HorizontalOptions="Start" />
+            <!-- VISTA 1: VISTA PARA EL ADMINISTRADOR (LISTA DE TURNOS REGISTRADOS) -->
+            <!-- VISTA PARA EL ADMINISTRADOR (LISTA DE TURNOS REGISTRADOS) -->
+            <VerticalStackLayout x:Name="PanelAdmin" Spacing="15" IsVisible="False">
+                <Label Text="Turnos Registrados" FontSize="24" FontAttributes="Bold" TextColor="#1B2A4A" />
+                <Label Text="Listado de solicitudes enviadas por los clientes:" FontSize="13" TextColor="Gray" />
 
-            <!--titulo -->
-            <Label Text="Registrar Nuevo Turno"
-                   FontSize="22"
-                   FontAttributes="Bold"
-                   TextColor="#1B2A4A" />
+                <!-- Listado Dinámico de Turnos -->
+                <CollectionView x:Name="ListaTurnosView" SelectionMode="None">
+                    <CollectionView.EmptyView>
+                        <Label Text="No hay turnos registrados actualmente." 
+                   HorizontalOptions="Center" 
+                   Margin="0,30,0,0" 
+                   TextColor="Gray" />
+                    </CollectionView.EmptyView>
 
-            <!-- aca es para ingresar los datos del cliente -->
-            <Label Text="Datos del Cliente" FontAttributes="Bold" TextColor="Black" Margin="0,5,0,0" />
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Stroke="#1B2A4A" 
+                        StrokeThickness="1" 
+                        BackgroundColor="White" 
+                        Padding="15" 
+                        Margin="0,0,0,15">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="12" />
+                                </Border.StrokeShape>
 
-            <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="50">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="8" />
-                </Border.StrokeShape>
-                <Entry Placeholder="Nombre y Apellido del Dueño" PlaceholderColor="Gray" TextColor="Black" VerticalOptions="Center" />
-            </Border>
+                                <VerticalStackLayout Spacing="8">
 
-            <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="50">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="8" />
-                </Border.StrokeShape>
-                <Entry Placeholder="Número de Teléfono" Keyboard="Telephone" PlaceholderColor="Gray" TextColor="Black" VerticalOptions="Center" />
-            </Border>
+                                    <!-- DATOS DEL VEHÍCULO Y CLIENTE -->
+                                    <HorizontalStackLayout Spacing="5">
+                                        <Label Text="Vehículo:" FontAttributes="Bold" TextColor="#1B2A4A" FontSize="16" />
+                                        <Label Text="{Binding Vehiculo}" TextColor="#512BD4" FontAttributes="Bold" FontSize="16" />
+                                    </HorizontalStackLayout>
 
-            <!-- los datos del vehiculo -->
-            <Label Text="Datos del Vehículo" FontAttributes="Bold" TextColor="Black" Margin="0,5,0,0" />
+                                    <BoxView HeightRequest="1" Color="#E5E7EB" Margin="0,2" />
 
-            <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="50">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="8" />
-                </Border.StrokeShape>
-                <Picker Title="Seleccione tipo de vehículo" TitleColor="Black" TextColor="Black" VerticalOptions="Center">
-                    <Picker.Items>
-                        <x:String>Auto</x:String>
-                        <x:String>Moto</x:String>
-                    </Picker.Items>
-                </Picker>
-            </Border>
+                                    <HorizontalStackLayout Spacing="5">
+                                        <Label Text="Cliente:" FontAttributes="Bold" TextColor="#1B2A4A" />
+                                        <Label Text="{Binding NombreCliente}" TextColor="Black" />
+                                    </HorizontalStackLayout>
 
-            <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="50">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="8" />
-                </Border.StrokeShape>
-                <Entry Placeholder="Marca y Modelo " PlaceholderColor="Gray" TextColor="Black" VerticalOptions="Center" />
-            </Border>
+                                    <HorizontalStackLayout Spacing="5">
+                                        <Label Text="Teléfono:" FontAttributes="Bold" TextColor="#1B2A4A" />
+                                        <Label Text="{Binding Telefono}" TextColor="Black" />
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout Spacing="5">
+                                        <Label Text="📅 Fecha de Solicitud:" FontAttributes="Bold" TextColor="#1B2A4A" />
+                                        <Label Text="{Binding FechaTurno}" TextColor="Black" />
+                                    </HorizontalStackLayout>
 
-            <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="50">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="8" />
-                </Border.StrokeShape>
-                <Entry Placeholder="Patente / Dominio" PlaceholderColor="Gray" TextColor="Black" VerticalOptions="Center" />
-            </Border>
+                                    <VerticalStackLayout Spacing="2">
+                                        <Label Text="Motivo de Ingreso:" FontAttributes="Bold" TextColor="#1B2A4A" />
+                                        <Label Text="{Binding Motivo}" TextColor="#4A5568" />
+                                    </VerticalStackLayout>
 
-            <!-- caracteristicas del turno -->
-            <Label Text="Detalle del Turno" FontAttributes="Bold" TextColor="Black" Margin="0,5,0,0" />
+                                    <!-- ESTADO Y DIAGNÓSTICO ACTUAL -->
+                                    <BoxView HeightRequest="1" Color="#E5E7EB" Margin="0,4" />
 
-            <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="50">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="8" />
-                </Border.StrokeShape>
-                <Picker Title="Seleccione motivo del servicio" TitleColor="Black" TextColor="Black" VerticalOptions="Center">
-                    <Picker.Items>
-                        <x:String>Mantenimiento</x:String>
-                        <x:String>Diagnóstico</x:String>
-                        <x:String>Reparación</x:String>
-                    </Picker.Items>
-                </Picker>
-            </Border>
+                                    <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                                        <Label Text="Estado Actual:" FontAttributes="Bold" TextColor="#1B2A4A" VerticalOptions="Center" />
+                                        <Border BackgroundColor="#E0E7FF" Padding="8,4">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="6" />
+                                            </Border.StrokeShape>
+                                            <Label Text="{Binding Estado}" TextColor="#512BD4" FontAttributes="Bold" FontSize="12" />
+                                        </Border>
+                                    </HorizontalStackLayout>
 
-            <Label Text="Fecha de Ingreso:" TextColor="Black" />
-            <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="50">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="8" />
-                </Border.StrokeShape>
-                <DatePicker TextColor="Black" VerticalOptions="Center" />
-            </Border>
+                                    <VerticalStackLayout Spacing="2">
+                                        <Label Text="Diagnóstico:" FontAttributes="Bold" TextColor="#1B2A4A" />
+                                        <Label Text="{Binding Diagnostico}" TextColor="#374151" FontAttributes="Italic" />
+                                    </VerticalStackLayout>
 
-            <Label Text="Fecha Estimada de Finalización:" TextColor="Black" />
-            <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="50">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="8" />
-                </Border.StrokeShape>
-                <DatePicker TextColor="Black" VerticalOptions="Center" />
-            </Border>
+                                    <HorizontalStackLayout Spacing="5">
+                                        <Label Text="⏱Est. Entrega:" FontAttributes="Bold" TextColor="#1B2A4A" />
+                                        <Label Text="{Binding FechaEstimadaTermino}" TextColor="#512BD4" FontAttributes="Bold" />
+                                    </HorizontalStackLayout>
 
-            <!-- guardar turno -->
-            <Button Text="Guardar Turno"
-                    BackgroundColor="#1B2A4A"
-                    TextColor="White"
-                    CornerRadius="10"
-                    HeightRequest="50"
-                    Margin="0,10,0,10" />
+                                    <!-- BOTÓN PARA ABRIR LA EDICIÓN -->
+                                    <Button Text="✏️ Editar Estado y Diagnóstico" 
+                                Clicked="OnEditarTurnoClicked" 
+                                CommandParameter="{Binding .}" 
+                                BackgroundColor="#512BD4" 
+                                TextColor="White" 
+                                FontAttributes="Bold" 
+                                FontSize="13" 
+                                CornerRadius="8" 
+                                Margin="0,8,0,0" />
 
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+            <!-- VISTA 2: VISTA PARA EL USUARIO / CLIENTE (FORMULARIO PARA REGISTRAR TURNO) -->
+            <VerticalStackLayout x:Name="PanelUsuario" Spacing="12" IsVisible="False">
+                <Label Text="Solicitar un Turno" FontSize="24" FontAttributes="Bold" TextColor="#1B2A4A" />
+                <Label Text="Complete los datos de su vehículo para agendar una cita:" FontSize="13" TextColor="Gray" />
+                <!-- Nombre Cliente -->
+                <Label Text="Su Nombre Completo" FontAttributes="Bold" TextColor="#1B2A4A" />
+                <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="45">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8" />
+                    </Border.StrokeShape>
+                    <Entry x:Name="TxtNombreCliente" Placeholder="Ej. Juan Pérez" PlaceholderColor="Gray" TextColor="Black" VerticalOptions="Center" />
+                </Border>
+                <!-- Teléfono -->
+                <Label Text="Teléfono de Contacto" FontAttributes="Bold" TextColor="#1B2A4A" />
+                <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="45">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8" />
+                    </Border.StrokeShape>
+                    <Entry x:Name="TxtTelefonoCliente" Placeholder="Ej. 3704123456" Keyboard="Telephone" PlaceholderColor="Gray" TextColor="Black" VerticalOptions="Center" />
+                </Border>
+                <!-- Vehículo -->
+                <Label Text="Modelo y Patente del Vehículo" FontAttributes="Bold" TextColor="#1B2A4A" />
+                <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="45">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8" />
+                    </Border.StrokeShape>
+                    <Entry x:Name="TxtVehiculo" Placeholder="Ej. Toyota Corolla - AB123CD" PlaceholderColor="Gray" TextColor="Black" VerticalOptions="Center" />
+                </Border>
+                <!-- Motivo de Trabajo -->
+                <Label Text="Motivo / Servicio Requerido" FontAttributes="Bold" TextColor="#1B2A4A" />
+                <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="80">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8" />
+                    </Border.StrokeShape>
+                    <Editor x:Name="TxtMotivo" Placeholder="Describa la falla o servicio (ej: cambio de aceite, frenos...)" PlaceholderColor="Gray" TextColor="Black" />
+                </Border>
+                <!-- Botón Confirmar Turno -->
+                <Button Text="Enviar Solicitud de Turno"
+                        Clicked="OnGuardarTurnoClicked"
+                        BackgroundColor="#512BD4"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        HeightRequest="50"
+                        Margin="0,10,0,0" />
+            </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

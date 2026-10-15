@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             x:Class="PachiTaller.EditarTurnoPage"
+             Title="Editar Diagnóstico y Estado"
+             BackgroundColor="#F4F6F9">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- Botón de retorno -->
+            <Button Text="← Volver a Turnos"
+                    Clicked="OnVolverClicked"
+                    BackgroundColor="Transparent"
+                    TextColor="#512BD4"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start" />
+
+            <Label Text="Editar Turno" FontSize="24" FontAttributes="Bold" TextColor="#1B2A4A" />
+
+            <!-- Resumen del Vehículo y Cliente -->
+            <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="#E0E7FF" Padding="15">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="5">
+                    <Label x:Name="LblVehiculo" FontAttributes="Bold" FontSize="16" TextColor="#512BD4" />
+                    <Label x:Name="LblCliente" TextColor="#1B2A4A" FontSize="13" />
+                    <Label x:Name="LblMotivo" TextColor="#4A5568" FontSize="13" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Formulario de Edición -->
+            <VerticalStackLayout Spacing="12">
+
+                <!-- 1. Estado del Vehículo -->
+                <Label Text="Estado del Vehículo" FontAttributes="Bold" TextColor="#1B2A4A" />
+                <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="45">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8" />
+                    </Border.StrokeShape>
+                    <Picker x:Name="PickerEstado" TextColor="#512BD4" FontAttributes="Bold" VerticalOptions="Center">
+                        <Picker.Items>
+                            <x:String>Pendiente</x:String>
+                            <x:String>En Proceso</x:String>
+                            <x:String>Finalizado</x:String>
+                            <x:String>Cancelado</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </Border>
+
+                <!-- 2. Diagnóstico Técnico -->
+                <Label Text="Diagnóstico del Problema / Trabajo" FontAttributes="Bold" TextColor="#1B2A4A" />
+                <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10" HeightRequest="100">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8" />
+                    </Border.StrokeShape>
+                    <Editor x:Name="TxtDiagnostico" 
+                            Placeholder="Describa la revisión técnica o las reparaciones a realizar..." 
+                            PlaceholderColor="Gray" 
+                            TextColor="Black" 
+                            FontSize="13" />
+                </Border>
+
+                <!-- 3. Fecha Estimada de Entrega -->
+                <Label Text="Fecha Estimada de Entrega" FontAttributes="Bold" TextColor="#1B2A4A" />
+                <Border Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="45">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8" />
+                    </Border.StrokeShape>
+                    <DatePicker x:Name="PickerFechaEntrega" 
+                                Format="dd/MM/yyyy" 
+                                TextColor="Black" 
+                                MinimumDate="{x:Static sys:DateTime.Today}" />
+                </Border>
+                <!-- AGREGAR REPUESTO Y DESCONTAR STOCK -->
+                <Label Text="Agregar Repuesto al Trabajo" FontAttributes="Bold" TextColor="#1B2A4A" Margin="0,10,0,0" />
+
+                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10">
+                    <Border Grid.Column="0" Stroke="#1B2A4A" StrokeThickness="1" BackgroundColor="White" Padding="10,0" HeightRequest="45">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8" />
+                        </Border.StrokeShape>
+                        <Picker x:Name="PickerRepuestosStock" ItemDisplayBinding="{Binding Nombre}" Title="Seleccionar repuesto..." VerticalOptions="Center" />
+                    </Border>
+
+                    <Button Grid.Column="1" Text="+ Usar 1 Un." Clicked="OnAgregarRepuestoClicked" BackgroundColor="#22C55E" TextColor="White" FontAttributes="Bold" HeightRequest="45" CornerRadius="8" />
+                </Grid>
+
+                <!-- RESUMEN DE COSTOS -->
+                <Border BackgroundColor="#F3F4F6" Padding="12" Margin="0,10,0,0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Costo Mano de Obra ($):" FontAttributes="Bold" TextColor="#1B2A4A" />
+                        <Entry x:Name="TxtManoObra" Keyboard="Numeric" Placeholder="0" TextColor="Black" HeightRequest="40" Unfocused="OnCalcularTotal" />
+
+                        <HorizontalStackLayout Spacing="5" Margin="0,5,0,0">
+                            <Label Text="Repuestos Acumulados:" FontAttributes="Bold" TextColor="#1B2A4A" />
+                            <Label x:Name="LblCostoRepuestos" Text="$0" TextColor="#512BD4" FontAttributes="Bold" />
+                        </HorizontalStackLayout>
+
+                        <BoxView HeightRequest="1" Color="#D1D5DB" Margin="0,4" />
+
+                        <HorizontalStackLayout Spacing="5">
+                            <Label Text="PRESUPUESTO TOTAL:" FontAttributes="Bold" TextColor="#1B2A4A" FontSize="16" />
+                            <Label x:Name="LblCostoTotal" Text="$0" TextColor="#22C55E" FontAttributes="Bold" FontSize="16" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+                <!-- Botón Guardar -->
+                <Button Text="Guardar Diagnóstico y Estado"
+                        Clicked="OnGuardarClicked"
+                        BackgroundColor="#512BD4"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        HeightRequest="50"
+                        Margin="0,15,0,0" />
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

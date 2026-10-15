@@ -1,17 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿namespace PachiTaller;
 
-namespace PachiTaller
+public partial class App : Application
 {
-    public partial class App : Application
-    {
-        public App()
-        {
-            InitializeComponent();
-        }
+    // Variable global para recordar el perfil iniciado ("Admin" o "Cliente")
+    public static string RolSesionActual { get; set; } = "Admin";
 
-        protected override Window CreateWindow(IActivationState? activationState)
-        {
-            return new Window(new AppShell());
-        }
+    public App()
+    {
+        InitializeComponent();
+        UserAppTheme = AppTheme.Light;
+        MainPage = new AppShell();
     }
 }
