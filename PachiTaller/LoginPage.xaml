@@ -7,22 +7,24 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
-             <Border Stroke="#1B2A4A" 
-                 StrokeThickness="2" 
-                  BackgroundColor="White" 
-                HeightRequest="200" 
-                 WidthRequest="280" 
-                 HorizontalOptions="Center" 
-                 Padding="0" 
-                 Margin="0,0,0,15">
+            <Border Stroke="#1B2A4A" 
+        StrokeThickness="2" 
+        BackgroundColor="#1B2A4A" 
+        HeightRequest="220" 
+        WidthRequest="280" 
+        HorizontalOptions="Center" 
+        Padding="0" 
+        Margin="0,0,0,15">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="24" />
                 </Border.StrokeShape>
+
+                <!-- La propiedad IsClippedToBounds recorta la imagen a la forma redondeada del Border -->
                 <Grid IsClippedToBounds="True">
-                <Image Source="logopachi.png" 
-                    Aspect="AspectFill" 
-                     HorizontalOptions="Fill" 
-                     VerticalOptions="Fill" />
+                    <Image Source="logo_taller.png" 
+               Aspect="AspectFill" 
+               HorizontalOptions="Fill" 
+               VerticalOptions="Fill" />
                 </Grid>
             </Border>
             <!-- Logo / Título del Taller -->
